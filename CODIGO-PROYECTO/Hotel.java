@@ -20,8 +20,8 @@ public class Hotel {
     }
 
     public void reservarHabitacion(int numero) throws ReservaException {
-        Habitacion habitacion = buscarHabitacion(numero);//Busca una habitación específica por número.
-        habitacion.reservar(); //Llama al método reservar() de la habitación.
+        Habitacion habitacion = buscarHabitacion(numero);//Busca una habitación específica por número. (metodo privado de buscar)
+        habitacion.reservar(); //Llama al método reservar() de la habitación. Marcada como reservada
         DatabaseManager.guardarHabitacion(habitacion); //Guarda de la base de datos
     }
 
@@ -41,10 +41,10 @@ public class Hotel {
         return habitaciones; //Devuelve la lista de habitaciones.
     }
 
-    private Habitacion buscarHabitacion(int numero) throws ReservaException {
+    private Habitacion buscarHabitacion(int numero) throws ReservaException { //buscar con su número, si no existe lanza una excepcion
         for (Habitacion h : habitaciones) {
             if (h.getNumero() == numero) {
-                return h;
+                return h; //devuelve la habitacion encontrada
             }
         }
         throw new ReservaException("Habitación con número " + numero + " no encontrada.");
